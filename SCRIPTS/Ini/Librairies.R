@@ -1,0 +1,10 @@
+install.packages("golem")
+install.packages("remotes")
+install.packages("DBI")
+install.packages("RPostgres")
+install.packages("usethis")
+install.packages("httr2")
+install.packages("gh")
+
+library(golem)
+create_golem(path = "L:/EGDD/DAEA/PAG/K_STAGES/2024_Axel LOUAILECHE/ProjetR/info/SCRIPTS/ProjetIni")

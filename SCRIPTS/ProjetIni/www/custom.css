@@ -1,0 +1,345 @@
+/* ===== THÈMES DYNAMIQUES ===== */
+
+.ep-theme {
+  --main-color: #0072BC;
+  --accent-color: #3399FF;
+  --text-color: #ffffff;
+  background-color: #f9f9f9  !important;
+}
+
+.eu-theme {
+  --main-color: #B30000;
+  --accent-color: #FF6666;
+  --text-color: #ffffff;
+  background-color: #f9f9f9  !important;
+}
+
+  
+
+/* Boutons EU/EP par défaut (non actifs) */
+.btn-eau {
+  border-radius: 25px;
+  margin: 5px;
+  padding: 6px 20px;
+  font-weight: bold;
+  color: #444; /* texte gris foncé */
+  background-color: #e0e0e0; /* gris clair */
+  border: none;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Texte + icône bien visibles même en inactif */
+.btn-eau i {
+  margin-right: 6px;
+}
+
+/* Bouton actif EU */
+.active-eu {
+  background-color: #004880 !important;
+  color: white !important;
+}
+
+/* Bouton actif EP */
+.active-ep {
+  background-color: #00C5AF !important;
+  color: white !important;
+}
+
+/* Pour éviter qu’ils disparaissent au clic */
+.btn-eau:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+
+/* ===== BARRE DE NAVIGATION ===== */
+
+.navbar-fixed {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #2C3E50;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  margin-bottom: 16px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.navbar-logo {
+  height: 55px;
+  margin-right: 20px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  margin-left: -60px;
+}
+
+.navbar-buttons button {
+  margin-left: 10px;
+}
+
+/* ===== TITRES ===== */
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: #2C3E50;
+}
+
+/* ===== BLOCS ET CONTENUS ===== */
+
+.bandeau {
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin: 20px 0 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 16px;
+}
+
+
+.tab-content {
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+
+/* ===== TABS & NAVIGATION ===== */
+
+.nav-tabs {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  z-index: 10;
+  position: relative;
+}
+
+
+.nav-pills {
+  background-color: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+
+.nav-tabs > li > a {
+  background-color: #e9ecef;
+  color: #2C3E50;
+  font-weight: 600;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  background-color: #2C3E50 !important;
+  color: #fff !important;
+}
+
+/* Onglets EP/EU si utilisés avec nav-pills */
+.nav-pills > li > a {
+  border-radius: 20px;
+  margin: 2px;
+  font-weight: bold;
+  color: black !important;
+  border: 2px solid transparent;
+}
+
+.nav-pills > li.active > a {
+  color: black !important;
+  background-color: var(--accent-color) !important;
+  border-color: var(--main-color) !important;
+  box-shadow: 0 0 4px var(--main-color);
+}
+
+.nav-pills > li > a:hover {
+  filter: brightness(0.95);
+}
+
+/* Réduction de l'espacement entre les onglets principaux et les sous-onglets */
+.nav-tabs + .tab-content .nav-tabs {
+  margin-top: -35px; 
+}
+
+/* Pour un effet fusion propre */
+.nav-tabs + .tab-content .nav-tabs {
+  border-top: 1px solid #dee2e6;
+  border-radius: 0 0 8px 8px;
+}
+
+.tab-content {
+  margin-top: -10px !important;
+}
+
+
+
+/* Pour resserrer tout le bloc si besoin */
+.onglet-bloc {
+  margin-top: 10px !important; /* réduit l'espacement par défaut */
+  padding-top: -100px;
+}
+
+
+/* ===== AUTRES ===== */
+
+.selectize-input {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+}
+
+.well {
+  background-color: #ffffff;
+  border-left: 4px solid #E74C3C;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+}
+
+.tab-content .col-sm-4,
+.tab-content .col-sm-6,
+.tab-content .col-sm-12 {
+  padding-bottom: 10px;
+}
+
+.plot-container {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+h3, h4 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #2C3E50;
+}
+
+.radio label {
+  border: 2px solid transparent;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #ccc;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.radio input[value='Eau usée']:checked + label {
+  background-color: #004880;
+  border-color: #004880;
+}
+
+.radio input[value='Eau pluviale']:checked + label {
+  background-color: #00C5AF;
+  border-color: #00C5AF;
+}
+
+/* Masque le contenu tabset EP/EU (si utilisé uniquement comme switch visuel) */
+#type_eau > .tab-content {
+  display: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+}
+
+.onglet-bloc {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.eu-theme .active-eu,
+.ep-theme .active-ep {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+.eu-theme .bandeau,
+.ep-theme .bandeau {
+  background-color: var(--main-color) !important;
+  color: white;
+}
+
+.card-kpi { background:#f8f9fa;border-radius:14px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.card-kpi .kpi-title { font-size:12px;color:#6c757d;text-transform:uppercase;letter-spacing:.08em;font-weight:700; }
+.card-kpi .kpi-value { font-size:22px;font-weight:800;color:#212529; }
+.h-title { font-weight:800; margin: 8px 0 16px; }
+table.table { font-size: 0.95rem; }
+
+/* Barre titre dynamique (fil d’Ariane) */
+.eu-crumb {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: #f5f7fa;
+  border: 1px solid #e3e6eb;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.eu-crumb .crumb-main { color:#233044; }
+.eu-crumb .crumb-sep { margin: 0 6px; color:#98a2ad; }
+.eu-crumb .crumb-sub  { color:#5b6b7c; font-weight:600; }
+
+/* Encarts texte homogènes */
+.eu-infocard {
+  border: 1px solid #e3e6eb;
+  border-left: 3px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+.eu-infocard-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #233044;
+}
+.eu-infocard-body {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  color: #384553;
+}
+
+/* Légende plotly compacte */
+.js-plotly-plot .legend { font-size: 11px; }
+
+.eu-card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:12px;margin-bottom:16px;}
+.eu-card h4{font-weight:600;margin:6px 0 12px 0;}
+.eu-h400{min-height:400px}
+.eu-subtabs .nav-pills .nav-link{border-radius:999px;margin-right:8px}
+.eu-subtabs{margin-bottom:12px}
+
+
+/* élargir le petit tableau "Collecteurs" */
+.linbox { min-width: 260px; }
+.linbox table { font-size: 12px; }
+.linbox td, .linbox th { padding: 4px 8px; }
+
+
+

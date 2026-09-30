@@ -1,0 +1,5 @@
+PG_HOST="host"
+PG_DBNAME="database"
+PG_USER="username"
+PG_PASSWORD="password"
+PG_PORT="5432"

@@ -1,0 +1,190 @@
+TOP-LEVEL:
+ - Metropole_EU_U
+ - Metropole_EP
+ - Commune_EU_U
+ - Commune_EP
+ - Systeme Assainissement_EU_U
+ - Systeme Assainissement_EP
+ - Bassin versant_EU_U
+ - Bassin versant_EP
+ - Captage_EU_U
+ - Captage_EP
+
+HITS:
+ - Metropole_EP/VP_BASSINS
+ - Metropole_EP/AGE_BASSINS
+ - Metropole_EP/AGE_BASSINS/nb_bassins
+ - Commune_EP/VP_BASSINS
+ - Commune_EP/AGE_BASSINS
+ - Systeme Assainissement_EU_U
+ - Systeme Assainissement_EP
+ - Systeme Assainissement_EP/VP_BASSINS
+ - Systeme Assainissement_EP/AGE_BASSINS
+ - Bassin versant_EU_U
+ - Bassin versant_EU_U/LRU/Bassin
+ - Bassin versant_EU_U/LREU/Bassin
+ - Bassin versant_EU_U/LEP/Bassin
+ - Bassin versant_EU_U/LRV/Bassin
+ - Bassin versant_EU_U/LinClass/Bassin
+ - Bassin versant_EU_U/ConMat/Bassin
+ - Bassin versant_EU_U/ConAge/Bassin
+ - Bassin versant_EU_U/LRM/Bassin
+ - Bassin versant_EU_U/AR/Bassin
+ - Bassin versant_EU_U/NPPTR/Bassin
+ - Bassin versant_EU_U/LRSPVP/Bassin
+ - Bassin versant_EU_U/VPR/Bassin
+ - Bassin versant_EU_U/NBCE/Bassin
+ - Bassin versant_EU_U/VPBr/Bassin
+ - Bassin versant_EU_U/NSTEU/Bassin
+ - Bassin versant_EU_U/NSTR/Bassin
+ - Bassin versant_EU_U/NFPR/Bassin
+ - Bassin versant_EU_U/NDO/Bassin
+ - Bassin versant_EU_U/NDes/Bassin
+ - Bassin versant_EU_U/VPSTEU/Bassin
+ - Bassin versant_EU_U/VPSTR/Bassin
+ - Bassin versant_EU_U/VPFPR/Bassin
+ - Bassin versant_EU_U/NSR/Bassin
+ - Bassin versant_EU_U/AgeSTEU/Bassin
+ - Bassin versant_EU_U/AgeSTR/Bassin
+ - Bassin versant_EU_U/LRSFa/Bassin
+ - Bassin versant_EU_U/LIN_SEC_CLASS/Bassin
+ - Bassin versant_EU_U/LITV/Bassin
+ - Bassin versant_EU_U/LDIAG_PREDIAG_DIAG/Bassin
+ - Bassin versant_EU_U/LDIAG_PREDIAG_PREDIAG/Bassin
+ - Bassin versant_EU_U/ES_NV/Bassin
+ - Bassin versant_EU_U/ES_V/Bassin
+ - Bassin versant_EU_U/NISTEU/Bassin
+ - Bassin versant_EU_U/NISTR/Bassin
+ - Bassin versant_EU_U/ES_STEU/Bassin
+ - Bassin versant_EU_U/ES_STR/Bassin
+ - Bassin versant_EU_U/LRIT/Bassin
+ - Bassin versant_EP
+ - Bassin versant_EP/LRV/Bassin
+ - Bassin versant_EP/LEP/Bassin
+ - Bassin versant_EP/LIN_CLASS/Bassin
+ - Bassin versant_EP/CON_MAT/Bassin
+ - Bassin versant_EP/CON_AGE/Bassin
+ - Bassin versant_EP/LRM/Bassin
+ - Bassin versant_EP/AR/Bassin
+ - Bassin versant_EP/NPPTR/Bassin
+ - Bassin versant_EP/LRSPVP/Bassin
+ - Bassin versant_EP/VPR/Bassin
+ - Bassin versant_EP/NBCE/Bassin
+ - Bassin versant_EP/VP_BR/Bassin
+ - Bassin versant_EP/NBEO/Bassin
+ - Bassin versant_EP/NBEOT/Bassin
+ - Bassin versant_EP/NLI/Bassin
+ - Bassin versant_EP/NNO/Bassin
+ - Bassin versant_EP/NTR_EP/Bassin
+ - Bassin versant_EP/NAP/Bassin
+ - Bassin versant_EP/NPI/Bassin
+ - Bassin versant_EP/NDES/Bassin
+ - Bassin versant_EP/NT/Bassin
+ - Bassin versant_EP/VP_BASSINS
+ - Bassin versant_EP/VP_BASSINS/Bassin
+ - Bassin versant_EP/VP_OGEP/Bassin
+ - Bassin versant_EP/VP_AP/Bassin
+ - Bassin versant_EP/VP_PI/Bassin
+ - Bassin versant_EP/VP_TREM/Bassin
+ - Bassin versant_EP/NBR/Bassin
+ - Bassin versant_EP/NAPR/Bassin
+ - Bassin versant_EP/NDESR/Bassin
+ - Bassin versant_EP/NTR_RECOLES/Bassin
+ - Bassin versant_EP/AGE_BASSINS
+ - Bassin versant_EP/AGE_BASSINS/Bassin
+ - Bassin versant_EP/AGE_STR_EP/Bassin
+ - Bassin versant_EP/LRSFA/Bassin
+ - Bassin versant_EP/LIN_SEC_CLASS/Bassin
+ - Bassin versant_EP/LITV/Bassin
+ - Bassin versant_EP/LDIAG_PREDIAG_DIAG/Bassin
+ - Bassin versant_EP/LDIAG_PREDIAG_PREDIAG/Bassin
+ - Bassin versant_EP/ES_NV/Bassin
+ - Bassin versant_EP/ES_V/Bassin
+ - Bassin versant_EP/LLI/Bassin
+ - Bassin versant_EP/NI_STR/Bassin
+ - Bassin versant_EP/ES_STR_EP/Bassin
+ - Bassin versant_EP/LRIT/Bassin
+ - Captage_EU_U
+ - Captage_EU_U/LRU/nomcaptage
+ - Captage_EU_U/LREU/nomcaptage
+ - Captage_EU_U/LEP/nomcaptage
+ - Captage_EU_U/LRV/nomcaptage
+ - Captage_EU_U/LinClass/nomcaptage
+ - Captage_EU_U/ConMat/nomcaptage
+ - Captage_EU_U/ConAge/nomcaptage
+ - Captage_EU_U/LRM/nomcaptage
+ - Captage_EU_U/AR/nomcaptage
+ - Captage_EU_U/NPPTR/nomcaptage
+ - Captage_EU_U/LRSPVP/nomcaptage
+ - Captage_EU_U/VPR/nomcaptage
+ - Captage_EU_U/NBCE/nomcaptage
+ - Captage_EU_U/VPBr/nomcaptage
+ - Captage_EU_U/NSTEU/nomcaptage
+ - Captage_EU_U/NSTR/nomcaptage
+ - Captage_EU_U/NFPR/nomcaptage
+ - Captage_EU_U/NDO/nomcaptage
+ - Captage_EU_U/NDes/nomcaptage
+ - Captage_EU_U/VPSTEU/nomcaptage
+ - Captage_EU_U/VPSTR/nomcaptage
+ - Captage_EU_U/VPFPR/nomcaptage
+ - Captage_EU_U/NSR/nomcaptage
+ - Captage_EU_U/AgeSTEU/nomcaptage
+ - Captage_EU_U/AgeSTR/nomcaptage
+ - Captage_EU_U/LRSFa/nomcaptage
+ - Captage_EU_U/LIN_SEC_CLASS/nomcaptage
+ - Captage_EU_U/LITV/nomcaptage
+ - Captage_EU_U/LDIAG_PREDIAG_DIAG/nomcaptage
+ - Captage_EU_U/LDIAG_PREDIAG_PREDIAG/nomcaptage
+ - Captage_EU_U/ES_NV/nomcaptage
+ - Captage_EU_U/ES_V/nomcaptage
+ - Captage_EU_U/NISTEU/nomcaptage
+ - Captage_EU_U/NISTR/nomcaptage
+ - Captage_EU_U/ES_STEU/nomcaptage
+ - Captage_EU_U/ES_STR/nomcaptage
+ - Captage_EU_U/LRIT/nomcaptage
+ - Captage_EP
+ - Captage_EP/LRV/nomcaptage
+ - Captage_EP/LEP/nomcaptage
+ - Captage_EP/LIN_CLASS/nomcaptage
+ - Captage_EP/CON_MAT/nomcaptage
+ - Captage_EP/CON_AGE/nomcaptage
+ - Captage_EP/LRM/nomcaptage
+ - Captage_EP/AR/nomcaptage
+ - Captage_EP/NPPTR/nomcaptage
+ - Captage_EP/LRSPVP/nomcaptage
+ - Captage_EP/VPR/nomcaptage
+ - Captage_EP/NBCE/nomcaptage
+ - Captage_EP/VP_BR/nomcaptage
+ - Captage_EP/NBEO/nomcaptage
+ - Captage_EP/NBEOT/nomcaptage
+ - Captage_EP/NLI/nomcaptage
+ - Captage_EP/NNO/nomcaptage
+ - Captage_EP/NTR_EP/nomcaptage
+ - Captage_EP/NAP/nomcaptage
+ - Captage_EP/NPI/nomcaptage
+ - Captage_EP/NDES/nomcaptage
+ - Captage_EP/NT/nomcaptage
+ - Captage_EP/VP_BASSINS
+ - Captage_EP/VP_BASSINS/nomcaptage
+ - Captage_EP/VP_OGEP/nomcaptage
+ - Captage_EP/VP_AP/nomcaptage
+ - Captage_EP/VP_PI/nomcaptage
+ - Captage_EP/VP_TREM/nomcaptage
+ - Captage_EP/NBR/nomcaptage
+ - Captage_EP/NAPR/nomcaptage
+ - Captage_EP/NDESR/nomcaptage
+ - Captage_EP/NTR_RECOLES/nomcaptage
+ - Captage_EP/AGE_BASSINS
+ - Captage_EP/AGE_BASSINS/nomcaptage
+ - Captage_EP/AGE_STR_EP/nomcaptage
+ - Captage_EP/LRSFA/nomcaptage
+ - Captage_EP/LIN_SEC_CLASS/nomcaptage
+ - Captage_EP/LITV/nomcaptage
+ - Captage_EP/LDIAG_PREDIAG_DIAG/nomcaptage
+ - Captage_EP/LDIAG_PREDIAG_PREDIAG/nomcaptage
+ - Captage_EP/ES_NV/nomcaptage
+ - Captage_EP/ES_V/nomcaptage
+ - Captage_EP/LLI/nomcaptage
+ - Captage_EP/NI_STR/nomcaptage
+ - Captage_EP/ES_STR_EP/nomcaptage
+ - Captage_EP/LRIT/nomcaptage

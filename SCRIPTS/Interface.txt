@@ -1,0 +1,365 @@
+library(shiny)
+library(ggplot2)
+library(shinyWidgets)
+
+
+# Fonction utilitaire pour les graphiques
+safe_pie <- function(data, title = "") {
+  if (is.null(data) || !is.numeric(data) || any(is.na(data)) || length(data) == 0 || sum(data, na.rm = TRUE) == 0) {
+    data <- c("Aucune donnée" = 1)
+  }
+  df <- data.frame(
+    label = names(data),
+    value = as.numeric(data)
+  )
+  df$percentage <- round(df$value / sum(df$value) * 100, 1)
+  df$label_text <- paste0(df$label, "\n", df$value, " (", df$percentage, "%)")
+
+  ggplot(df, aes(x = 2, y = value, fill = label)) +
+    geom_col(width = 1, color = "white") +
+    coord_polar(theta = "y") +
+    geom_text(aes(label = ifelse(value > 0, paste0(value, " (", percentage, "%)"), "")),
+              position = position_stack(vjust = 0.5), size = 4) +
+    xlim(0.5, 2.5) +
+    theme_void() +
+    labs(title = title, fill = NULL) +
+    theme(legend.position = "bottom")
+}
+# Exemple de données complétées pour prototyper
+donnees_patrimoine <- list(
+  "ALBIGNY-SUR-SAONE" = list(
+    "Eau usée" = list(
+      lineaire = c("Unitaires" = 13, "EU" = 1),
+      precision = c("< 50cm" = 9, "50-150cm" = 3, "> 150cm" = 1),
+      materiaux = c("Connu" = 11, "Estimé" = 4),
+      tranches_age = c("< 25 ans" = 11, "26-50 ans" = 2, "> 50 ans" = 1),
+      branchements = c("Estimé" = 1124, "Connu" = 398),
+      ouvrages = c("STEU" = 0, "STR" = 0, "FPR" = 0, "Dessableurs" = 4),
+      servitudes = list(parcelles = 31, reseaux_prives_km = 3),
+      valeur_neuf = list(reseaux = "0.0 M€", branchements = "0.0 M€"),
+      etat_sante = list(
+        non_visibles = c("Bon" = 5, "Moyen" = 3, "Mauvais" = 2, "Sans données" = 1),
+        visibles = c("Bon" = 3.4, "Sans données" = 3.6),
+        branchements = c("Aucune donnée" = 0),
+        ouvrages = list(
+          STEU = c("Etat dégradé" = 0, "Etat correct" = 0),
+          STR = c("Etat dégradé" = 0, "Etat correct" = 0),
+          FPR = c("Etat dégradé" = 0, "Etat correct" = 0)
+        )
+      ),
+      inspections = list(
+        STEU = list(nombre = 0, inspecte = 0, total = 0),
+        STR = list(nombre = 0, inspecte = 0, total = 0),
+        FPR = list(nombre = 0, inspecte = 0, total = 0)
+      ),
+      travaux = list(
+        total_rehab = "2 km",
+        extension = NA,
+        taux_renouvellement = NA,
+        branchements = NA,
+        STEU = NA,
+        STR = NA,
+        FPR = NA
+      )
+    )
+  )
+)
+
+ui <- fluidPage(
+  tags$head(
+    tags$script(HTML("
+  $(document).on('shown.bs.tab', 'a[data-toggle=\"tab\"]', function (e) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+")),
+
+    tags$style(HTML(
+      "body {
+        background-color: #F8F9FA;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0; /* ou très petit si besoin */
+        padding-top: 0;
+      }
+
+      .navbar-fixed {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: #2C3E50;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 6px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        margin-bottom: 16px;
+      }
+
+
+
+      .navbar-left {
+        display: flex;
+        align-items: center;
+      }
+      .navbar-logo {
+        height: 55px;
+        margin-right: 20px;
+        border-radius: 4px;
+        object-fit: contain;
+      }
+
+      .navbar-title {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .navbar-buttons button {
+        margin-left: 10px;
+      }
+      .bandeau {
+        background-color: #2C3E50;
+        color: white;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .tab-content {
+        padding: 15px;
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+      }
+      .well {
+        background-color: #ffffff;
+        border-left: 4px solid #E74C3C;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+      }
+      .selectize-input {
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        box-shadow: none;
+      }
+      .nav-tabs > li > a {
+        background-color: #e9ecef;
+        color: #2C3E50;
+        font-weight: 600;
+      }
+      .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        background-color: #2C3E50 !important;
+        color: #fff !important;
+      }
+      h1, h2, h3 {
+        font-weight: 600;
+        color: #2C3E50;
+      }
+
+      .tab-content .col-sm-4,
+      .tab-content .col-sm-6,
+      .tab-content .col-sm-12 {
+        padding-bottom: 10px;
+      }
+
+      .plot-container {
+        min-height: 250px;
+      }
+      .radio label {
+        border: 2px solid transparent;
+        padding: 8px 16px;
+        margin: 0 5px;
+        border-radius: 20px;
+        font-weight: bold;
+        color: white;
+        background-color: #ccc;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+
+      .radio input[value='Eau usée']:checked + label {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+      }
+
+      .radio input[value='Eau pluviale']:checked + label {
+        background-color: #3498db;
+        border-color: #2980b9;
+      }"
+    ))
+  ),
+
+  # Barre de navigation persistante avec logo et boutons
+  tags$div(class = "navbar-fixed",
+           tags$div(class = "navbar-left",
+                    tags$img(src = "logo_lyon.png", alt = "Logo Métropole de Lyon", onerror = "this.style.display='none'",
+                             class = "navbar-logo"),
+                    tags$span("Patrimoine eaux usées - Métropole de Lyon", class = "navbar-title")
+           ),
+           tags$div(class = "navbar-buttons",
+                    downloadButton("export_pdf", "Exporter PDF", class = "btn btn-light"),
+                    actionButton("go_home", "Accueil", class = "btn btn-light")
+           )
+  ),
+  div(style = "padding: 10px 20px;",
+      # Ligne compacte avec les filtres
+      fluidRow(
+        column(4,
+               selectInput("thematique", NULL, choices = c("", "Commune"))
+        ),
+        column(4,
+               selectInput("nom", NULL, choices = c("", "ALBIGNY-SUR-SAONE"))
+        ),
+        column(4,
+               radioButtons(
+                 inputId = "type_eau",
+                 label = NULL,
+                 choices = c("EU" = "Eau usée", "EP" = "Eau pluviale"),
+                 inline = TRUE
+               )
+        )
+      )
+
+
+  ),
+  tabsetPanel(
+    # Onglet principal 1 : Inventaire des patrimoines (avec sous-onglets verticaux)
+    tabPanel(
+      tagList(icon("map"), "Inventaire des patrimoines"),
+      tabsetPanel(
+        tabPanel(
+          tagList(icon("sitemap"), "Collecteurs"),
+          div(class = "bandeau",tagList(icon("sitemap"), "Collecteurs")),
+          div(class = "tab-content",
+              fluidRow(
+                column(4, div(class = "plot-container", plotOutput("plot_lineaire"))),
+                column(4, div(class = "plot-container", plotOutput("plot_precision"))),
+                column(4, div(class = "plot-container", plotOutput("plot_materiaux")))
+              ),
+              fluidRow(
+                column(4, div(class = "plot-container", plotOutput("plot_tranches"))),
+                column(4, verbatimTextOutput("valeur_neuf")),
+                column(4, verbatimTextOutput("servitudes"))
+              )
+
+          )
+        ),
+        tabPanel(
+          tagList(icon("plug"), "Branchements"),
+          div(class = "bandeau",tagList(icon("plug"), "Branchements")),
+          div(class = "tab-content",
+              fluidRow(
+                column(6, div(class = "plot-container", plotOutput("plot_branchements"))),
+                column(6, verbatimTextOutput("valeur_branchements"))
+              )
+          )
+        ),
+        tabPanel(
+          tagList(icon("cogs"), "Ouvrages"),
+          div(class = "bandeau",tagList(icon("cogs"), "Ouvrages")),
+          div(class = "tab-content",
+              fluidRow(
+                column(12, plotOutput("plot_ouvrages"))
+              )
+          )
+        )
+      )
+    ),
+
+    # Onglet principal 2 : Connaître l'état de santé (avec sous-onglets verticaux)
+    tabPanel(
+      tagList(icon("heartbeat"), "Connaître l'état de santé"),
+      tabsetPanel(
+        tabPanel(
+          tagList(icon("sitemap"), "Collecteurs"),
+          div(class = "bandeau",tagList(icon("sitemap"), "État des collecteurs")),
+          div(class = "tab-content",
+              fluidRow(
+                column(6, plotOutput("plot_etat_nv")),
+                column(6, plotOutput("plot_etat_v"))
+              )
+          )
+        ),
+        tabPanel(
+          tagList(icon("cogs"), "Ouvrages"),
+          div(class = "bandeau",tagList(icon("cogs"), "État des ouvrages")),
+          div(class = "tab-content",
+              fluidRow(
+                column(4, plotOutput("etat_STEU")),
+                column(4, plotOutput("etat_STR")),
+                column(4, plotOutput("etat_FPR"))
+              )
+          )
+        ),
+        tabPanel(
+          tagList(icon("search"), "Inspections"),
+          div(class = "bandeau",tagList(icon("search"), "Inspections")),
+          div(class = "tab-content",
+              verbatimTextOutput("inspect_out")
+          )
+        )
+      )
+    ),
+
+    # Onglet principal 3 : Programme de travaux (sans sous-onglet)
+    tabPanel(
+      tagList(icon("wrench"), "Programme de travaux"),
+      div(class = "bandeau",tagList(icon("wrench"), "Programme de travaux")),
+      div(class = "tab-content",
+          fluidRow(
+            column(6, verbatimTextOutput("travaux_out"))
+          )
+      )
+    )
+  ),
+)
+
+
+server <- function(input, output, session) {
+
+  selected_data <- reactive({
+    donnees_patrimoine[[input$nom]][[input$type_eau]]
+  })
+
+  output$titre_resume <- renderText({
+    paste("Commune :", input$nom, "/ Type de réseau :", input$type_eau)
+  })
+
+  output$plot_lineaire <- renderPlot({ safe_pie(selected_data()$lineaire, "Linéaire (km)") })
+  output$plot_precision <- renderPlot({ safe_pie(selected_data()$precision, "Précision planimétrique") })
+  output$plot_materiaux <- renderPlot({ safe_pie(selected_data()$materiaux, "Matériaux") })
+  output$plot_tranches <- renderPlot({ safe_pie(selected_data()$tranches_age, "Tranches d'âge") })
+  output$plot_branchements <- renderPlot({ safe_pie(selected_data()$branchements, "Branchements") })
+  output$plot_ouvrages <- renderPlot({ safe_pie(selected_data()$ouvrages, "Ouvrages") })
+  output$plot_etat_nv <- renderPlot({ safe_pie(selected_data()$etat_sante$non_visibles, "Collecteurs non visitables") })
+  output$plot_etat_v <- renderPlot({ safe_pie(selected_data()$etat_sante$visibles, "Collecteurs visitables") })
+  output$etat_STEU <- renderPlot({ safe_pie(selected_data()$etat_sante$ouvrages$STEU, "STEU") })
+  output$etat_STR <- renderPlot({ safe_pie(selected_data()$etat_sante$ouvrages$STR, "STR") })
+  output$etat_FPR <- renderPlot({ safe_pie(selected_data()$etat_sante$ouvrages$FPR, "FPR") })
+
+  output$valeur_neuf <- renderPrint({
+    v <- selected_data()$valeur_neuf
+    cat("Valeur à neuf réseaux :", v$reseaux)
+  })
+  output$valeur_branchements <- renderPrint({
+    v <- selected_data()$valeur_neuf
+    cat("Valeur à neuf branchements :", v$branchements)
+  })
+  output$servitudes <- renderPrint({
+    s <- selected_data()$servitudes
+    cat("Parcelles privées traversées :", s$parcelles, "\nRéseaux sur voies privées :", s$reseaux_prives_km, "km")
+  })
+  output$inspect_out <- renderPrint({
+    insp <- selected_data()$inspections
+    for (type in names(insp)) {
+      cat(type, ":", "Nombre:", insp[[type]]$nombre, "| Inspecté:", insp[[type]]$inspecte, "| Total:", insp[[type]]$total, "\n")
+    }
+  })
+  output$travaux_out <- renderPrint({
+    t <- selected_data()$travaux
+    cat("Total réhabilité réseaux:", t$total_rehab, "\nBranch. réhabilités:", t$branchements, "\nSTEU:", t$STEU, "\nSTR:", t$STR, "\nFPR:", t$FPR)
+  })
+}
+
+shinyApp(ui, server)
